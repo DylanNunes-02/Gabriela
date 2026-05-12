@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For You, Always 🌿</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --blush: #e8f2e8;
+        --rose: #9ec9a0;
+        --deep-rose: #4a8f5a;
+        --petal: #f2f8f2;
+        --sage: #c8e0c8;
+        --sage-deep: #5a9e6a;
+        --cream: #f6fbf4;
+        --gold: #c9a96e;
+        --frang-yellow: #f5e06e;
+        --frang-white: #fefdf6;
+        --text-dark: #1e3020;
+        --text-mid: #3d5c3f;
+        --text-light: #6e8f70;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--cream);
+        color: var(--text-dark);
+        font-family: "Jost", sans-serif;
+        font-weight: 300;
+        overflow-x: hidden;
+      }
+
+      /* ── Floating frangipani background ── */
+      .petals-bg {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .frang {
+        position: absolute;
+        opacity: 0;
+        animation: fallFrang linear infinite;
+        transform-origin: center center;
+      }
+      @keyframes fallFrang {
+        0% {
+          transform: translateY(-60px) rotate(0deg);
+          opacity: 0;
+        }
+        8% {
+          opacity: 0.55;
+        }
+        88% {
+          opacity: 0.3;
+        }
+        100% {
+          transform: translateY(110vh) rotate(300deg);
+          opacity: 0;
+        }
+      }
+
+      /* ── Navigation ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        justify-content: center;
+        gap: 2.5rem;
+        padding: 1.2rem 2rem;
+        background: rgba(242, 248, 242, 0.88);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(158, 201, 160, 0.3);
+      }
+      nav a {
+        font-family: "Jost", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 400;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-mid);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      nav a:hover {
+        color: var(--deep-rose);
+      }
+
+      /* ── Hero ── */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 6rem 2rem 4rem;
+        position: relative;
+        background:
+          radial-gradient(
+            ellipse 80% 60% at 50% 30%,
+            rgba(200, 224, 200, 0.55) 0%,
+            transparent 70%
+          ),
+          var(--cream);
+      }
+      .hero-ornament {
+        font-size: 1.5rem;
+        color: var(--rose);
+        letter-spacing: 0.5em;
+        margin-bottom: 2rem;
+        animation: fadeUp 1.2s ease both;
+      }
+      .hero h1 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(3.5rem, 10vw, 7rem);
+        font-weight: 300;
+        font-style: italic;
+        color: var(--text-dark);
+        line-height: 1.05;
+        animation: fadeUp 1.4s ease both;
+      }
+      .hero h1 em {
+        font-style: normal;
+        color: var(--deep-rose);
+      }
+      .hero-sub {
+        margin-top: 1.5rem;
+        font-size: 1rem;
+        font-weight: 300;
+        letter-spacing: 0.08em;
+        color: var(--text-light);
+        animation: fadeUp 1.6s ease both;
+      }
+      .hero-divider {
+        margin: 3rem auto;
+        width: 80px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--rose),
+          transparent
+        );
+        animation: fadeUp 1.8s ease both;
+      }
+      .scroll-hint {
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--text-light);
+        animation:
+          fadeUp 2s ease both,
+          bob 2.5s ease-in-out 2s infinite;
+      }
+      @keyframes bob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(6px);
+        }
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── Sections common ── */
+      section {
+        position: relative;
+        z-index: 1;
+        padding: 7rem 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .section-label {
+        font-size: 0.7rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--deep-rose);
+        margin-bottom: 1rem;
+      }
+      .section-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
+        font-weight: 300;
+        font-style: italic;
+        color: var(--text-dark);
+        line-height: 1.15;
+        margin-bottom: 3rem;
+      }
+      .divider-line {
+        width: 60px;
+        height: 1px;
+        background: var(--rose);
+        margin: 2rem 0 3rem;
+      }
+
+      /* ── Photo Gallery ── */
+      #memories {
+        background: transparent;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        gap: 1rem;
+      }
+      .photo-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 4px;
+        background: var(--blush);
+        cursor: pointer;
+        transition:
+          transform 0.4s ease,
+          box-shadow 0.4s ease;
+      }
+      .photo-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(196, 124, 130, 0.2);
+      }
+      .photo-card.tall {
+        grid-row: span 2;
+      }
+      .photo-card.wide {
+        grid-column: span 2;
+      }
+      .photo-placeholder {
+        width: 100%;
+        padding-bottom: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--blush) 0%,
+          #c8dfc8 50%,
+          var(--blush) 100%
+        );
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .photo-card.tall .photo-placeholder {
+        padding-bottom: 200%;
+      }
+      .photo-card.wide .photo-placeholder {
+        padding-bottom: 50%;
+      }
+      .photo-placeholder::after {
+        content: "🌸";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2rem;
+        opacity: 0.4;
+      }
+      .photo-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 2rem 1rem 1rem;
+        background: linear-gradient(
+          to top,
+          rgba(58, 42, 42, 0.5) 0%,
+          transparent 100%
+        );
+        color: white;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 0.95rem;
+        font-style: italic;
+        letter-spacing: 0.03em;
+        transform: translateY(4px);
+        opacity: 0;
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+      }
+      .photo-card:hover .photo-caption {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ── How to replace photos ── */
+      .photo-hint {
+        margin-top: 2rem;
+        padding: 1.2rem 1.5rem;
+        background: rgba(249, 232, 232, 0.5);
+        border-left: 3px solid var(--rose);
+        border-radius: 0 4px 4px 0;
+        font-size: 0.82rem;
+        color: var(--text-mid);
+        line-height: 1.7;
+      }
+      .photo-hint code {
+        background: rgba(196, 124, 130, 0.1);
+        padding: 1px 5px;
+        border-radius: 3px;
+        font-family: monospace;
+        font-size: 0.8rem;
+        color: var(--deep-rose);
+      }
+
+      /* ── Love Letter ── */
+      #letter {
+        background:
+          radial-gradient(
+            ellipse 100% 80% at 50% 50%,
+            rgba(212, 224, 212, 0.15) 0%,
+            transparent 70%
+          ),
+          transparent;
+      }
+      .letter-wrapper {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 4rem;
+        background: rgba(253, 248, 240, 0.8);
+        border: 1px solid rgba(228, 180, 184, 0.25);
+        border-radius: 2px;
+        position: relative;
+      }
+      .letter-wrapper::before {
+        content: "";
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        bottom: 8px;
+        left: 8px;
+        border: 1px solid rgba(228, 180, 184, 0.15);
+        border-radius: 1px;
+        pointer-events: none;
+      }
+      .letter-date {
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        color: var(--text-light);
+        margin-bottom: 2rem;
+      }
+      .letter-body {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.25rem;
+        font-weight: 400;
+        line-height: 1.85;
+        color: var(--text-dark);
+      }
+      .letter-body p {
+        margin-bottom: 1.5rem;
+      }
+      .letter-body .drop-cap::first-letter {
+        font-size: 3.5rem;
+        font-weight: 600;
+        float: left;
+        line-height: 0.75;
+        margin: 0.1em 0.08em 0 0;
+        color: var(--deep-rose);
+      }
+      .letter-sign {
+        margin-top: 2.5rem;
+        font-family: "Cormorant Garamond", serif;
+        font-style: italic;
+        font-size: 1.3rem;
+        color: var(--deep-rose);
+      }
+
+      /* ── Things I love ── */
+      #love {
+        background: transparent;
+      }
+      .love-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.5rem;
+      }
+      .love-card {
+        padding: 2rem;
+        background: var(--petal);
+        border: 1px solid rgba(228, 180, 184, 0.3);
+        border-radius: 4px;
+        transition:
+          transform 0.35s ease,
+          border-color 0.35s;
+        position: relative;
+        overflow: hidden;
+      }
+      .love-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--rose), var(--sage));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.35s ease;
+      }
+      .love-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--rose);
+      }
+      .love-card:hover::before {
+        transform: scaleX(1);
+      }
+      .love-number {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 3rem;
+        font-weight: 300;
+        color: rgba(228, 180, 184, 0.45);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+      .love-card h3 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.3rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--text-dark);
+        margin-bottom: 0.6rem;
+      }
+      .love-card p {
+        font-size: 0.88rem;
+        font-weight: 300;
+        color: var(--text-mid);
+        line-height: 1.75;
+      }
+
+      /* ── Timeline ── */
+      #timeline {
+        background: transparent;
+      }
+      .timeline-track {
+        position: relative;
+        padding-left: 2.5rem;
+      }
+      .timeline-track::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 10px;
+        width: 1px;
+        background: linear-gradient(
+          180deg,
+          transparent,
+          var(--rose) 10%,
+          var(--rose) 90%,
+          transparent
+        );
+      }
+      .timeline-item {
+        position: relative;
+        margin-bottom: 3.5rem;
+        opacity: 0;
+        transform: translateX(-16px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .timeline-item.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .timeline-dot {
+        position: absolute;
+        left: -2.5rem;
+        top: 6px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--cream);
+        border: 2px solid var(--rose);
+        transition: background 0.3s;
+      }
+      .timeline-item:hover .timeline-dot {
+        background: var(--rose);
+      }
+      .timeline-date {
+        font-size: 0.72rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--deep-rose);
+        margin-bottom: 0.4rem;
+      }
+      .timeline-item h3 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--text-dark);
+        margin-bottom: 0.4rem;
+      }
+      .timeline-item p {
+        font-size: 0.9rem;
+        font-weight: 300;
+        color: var(--text-mid);
+        line-height: 1.75;
+        max-width: 560px;
+      }
+
+      /* ── Footer ── */
+      footer {
+        text-align: center;
+        padding: 4rem 2rem 3rem;
+        border-top: 1px solid rgba(228, 180, 184, 0.2);
+        position: relative;
+        z-index: 1;
+      }
+      footer p {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.15rem;
+        font-style: italic;
+        color: var(--text-light);
+        margin-bottom: 0.5rem;
+      }
+      footer small {
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(160, 120, 120, 0.5);
+      }
+
+      /* ── Section separator ── */
+      .floral-sep {
+        text-align: center;
+        color: var(--rose);
+        font-size: 1.2rem;
+        letter-spacing: 0.4em;
+        margin: 1rem 0;
+        opacity: 0.6;
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 700px) {
+        nav {
+          gap: 1.2rem;
+        }
+        nav a {
+          font-size: 0.68rem;
+        }
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .photo-card.wide {
+          grid-column: span 1;
+        }
+        .photo-card.wide .photo-placeholder {
+          padding-bottom: 100%;
+        }
+        .letter-wrapper {
+          padding: 2rem;
+        }
+        section {
+          padding: 4rem 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Floating petals -->
+    <div class="petals-bg" id="petals"></div>
+
+    <!-- Nav -->
+    <nav>
+      <a href="#memories">Memories</a>
+      <a href="#letter">Letter</a>
+      <a href="#love">Why I Love You</a>
+      <a href="#timeline">Our Story</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="hero-ornament">✦ &nbsp;&nbsp; ✦ &nbsp;&nbsp; ✦</div>
+      <h1>For <em>You</em>,<br />Always and Forever</h1>
+      <p class="hero-sub">
+        A part of the internet that's yours and only yours! A part where our
+        love can be shown 😘.
+      </p>
+      <div class="hero-divider"></div>
+      <span class="scroll-hint">↓ &nbsp; scroll to explore</span>
+    </section>
+
+    <!-- ─── Memories / Gallery ─── -->
+    <section id="memories">
+      <p class="section-label">Chapter One</p>
+      <h2 class="section-title">
+        My Favorite Memories And Moments With You (And Some Pics Of You In
+        General 😋)
+      </h2>
+      <div class="divider-line"></div>
+
+      <div class="gallery-grid">
+        <!-- Card 1 — tall left -->
+        <div class="photo-card tall">
+          <img
+            src="Beautiful_at_rollerskating_place.jpg"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+          <div class="photo-caption">Angel at roller skating</div>
+        </div>
+
+        <!-- Card 2 — top right -->
+        <div class="photo-card">
+          <img
+            src="Grad.jpg"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+          <div class="photo-caption">
+            Our Graduation with the most intelligent lady
+          </div>
+        </div>
+
+        <!-- Card 3 — mid right -->
+        <div class="photo-card">
+          <img
+            src="Wits.jpg"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+          <div class="photo-caption">Us being silly as always</div>
+        </div>
+
+        <!-- Card 4 — wide bottom -->
+        <div class="photo-card wide">
+          <img
+            src="New_years_eve.jpg"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+          <div class="photo-caption">New years eve</div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="photo-card">
+          <img
+            src="Christmas_melrose.jpg"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+          <div class="photo-caption">Christmas at Melrose</div>
+        </div>
+
+        <!-- Card 6 — wide -->
+        <div class="photo-card wide">
+          <img
+            src="Us_rollerskating.jpg"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+          <div class="photo-caption">
+            One of my favourite photos of us because of how happy we look
+          </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="photo-card">
+          <img
+            src="Blanket_Sticky.jpg"
+            style="width: 100%; height: 100%; object-fit: cover"
+          />
+          <div class="photo-caption">
+            Couldn't leave out my precious blanket Sticky
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="floral-sep">✿ &nbsp; ❀ &nbsp; ✿</div>
+
+    <!-- ─── Love Letter ─── -->
+    <section id="letter">
+      <p class="section-label">Chapter Two</p>
+      <h2 class="section-title">A Letter to You</h2>
+      <div class="divider-line"></div>
+
+      <div class="letter-wrapper">
+        <p class="letter-date">— Written with love, always and forever</p>
+        <div class="letter-body">
+          <p class="drop-cap">
+            My angel Gabriela, I have been trying to find the right words for a
+            very long time. I'm not sure words will ever be enough, but I want
+            to try because you deserve every attempt.
+          </p>
+          <p>
+            There is so much I love about you. The way you are always positive,
+            the way you persevere through struggles and the way you never let
+            anything dim your light or stop you from achieving everything you
+            set your mind to.
+          </p>
+          <p>
+            I love how you are always capable of making me laugh with all the
+            silly things you do 😋... I love the way you always calm my mind
+            when things are hard and just the love you've shown me over the past
+            eight months of us being together. Even before we were together,
+            I've always felt the love and kindness that radiates from you.
+          </p>
+          <p>
+            Thank you for being exactly who you are. Thank you for choosing me,
+            again and again, even when I don't deserve it. Thank you for being
+            the wonderful soul you are. A soul so bright it puts the glow of
+            angels to shame. I love you more than words can say, and I will
+            spend every day of my life showing you just how much.
+          </p>
+        </div>
+        <p class="letter-sign">Forever yours, &nbsp;Your Chop Dylan 🌻</p>
+      </div>
+    </section>
+
+    <div class="floral-sep">✿ &nbsp; ❀ &nbsp; ✿</div>
+
+    <!-- ─── Things I Love About You ─── -->
+    <section id="love">
+      <p class="section-label">Chapter Three</p>
+      <h2 class="section-title">Why I Love You</h2>
+      <div class="divider-line"></div>
+
+      <div class="love-grid">
+        <div class="love-card">
+          <div class="love-number">01</div>
+          <h3>Your laugh</h3>
+          <p>
+            The way your whole face lights up when I say something unexpected
+            (firmly placed😂) and you laugh like it's the funniest thing you've
+            ever heard.
+          </p>
+        </div>
+
+        <div class="love-card">
+          <div class="love-number">02</div>
+          <h3>Your heart</h3>
+          <p>
+            You make every person around you feel cared for and you never
+            hesitate to help a person who needs it. You have so much love in
+            your heart to give and its beautiful...
+          </p>
+        </div>
+
+        <div class="love-card">
+          <div class="love-number">03</div>
+          <h3>Your mind</h3>
+          <p>
+            Your intelligence and the way you think. I am constantly amazed with
+            how beautiful your mind is and how you tackle problems head on with
+            creativity and courage.
+          </p>
+        </div>
+
+        <div class="love-card">
+          <div class="love-number">04</div>
+          <h3>Your faith</h3>
+          <p>
+            The way you face all the challenges and struggles in your life with
+            faith and bravery so strong. Your belief in God and his plan is so
+            inspiring and amazing too see.
+          </p>
+        </div>
+
+        <div class="love-card">
+          <div class="love-number">05</div>
+          <h3>The little things</h3>
+          <p>
+            From knowing the exact amount of time it takes me to telling me how
+            I am always welcome in your home. You always make me feel loved and
+            cared for.
+          </p>
+        </div>
+
+        <div class="love-card">
+          <div class="love-number">06</div>
+          <h3>Who you make me</h3>
+          <p>
+            Around you, I am becoming a better version of myself. You inspire me
+            to be a better man that could be worthy of you.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="floral-sep">✿ &nbsp; ❀ &nbsp; ✿</div>
+
+    <!-- ─── Timeline / Our Story ─── -->
+    <section id="timeline">
+      <p class="section-label">Chapter Four</p>
+      <h2 class="section-title">Our Story</h2>
+      <div class="divider-line"></div>
+
+      <div class="timeline-track">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <p class="timeline-date">The Beginning &mdash; February, 2025</p>
+          <h3>The day everything changed</h3>
+          <p>
+            We started honours having not spoken much before but it all really
+            kicked off with some chatting during tutorials and from there we
+            just kept on talking.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <p class="timeline-date">June, 2025</p>
+          <h3>Our first unofficial date</h3>
+          <p>
+            I remember going out for ice cream with you at MOTS, just me and
+            you. You told me about how you had taken your grans phone when you
+            visited her and had to go all the way back to give it back. We spoke
+            about ourselves and our lives growing up (where I found out how much
+            you disliked your school 😂). I remember thinking how cool you were
+            and how I wanted to know more about you...
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <p class="timeline-date">September, 2025</p>
+          <h3>
+            Our first official date where I told you how I felt and we became
+            official
+          </h3>
+          <p>
+            I remember coming to pick you up and being so nervous because I
+            didn't know how I would ask you out. I remember the dress you wore
+            and how beautiful you looked. It was such an amazing evening from
+            the dinner at Dopio to the walk around the center and the goofy way
+            I told you I liked you 😋. I remember how happy I was and just how
+            perfect everything was that day.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <p class="timeline-date">2025</p>
+          <h3>When I knew</h3>
+          <p>
+            There's no definite moment I can point to when I knew I loved you.
+            It was more of a realization over time. A build up of feelings and a
+            care for you that I had never felt for anyone else before. I knew I
+            loved you when I found myself longing to see you even when I had
+            just left your house. I knew I loved you when I found myself
+            thinking about you in every situation even during the SLR... I
+            think, thinking of you actually helped with that one 😂.
+          </p>
+          <br />
+          <p>
+            I knew I loved you when the picture of my future wasn't blurry
+            anymore but was your face as clear as day...
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <p class="timeline-date">Right now &mdash; 2026</p>
+          <h3>Today, and every day after</h3>
+          <p>
+            This chapter is still being written. And I can't wait to fill every
+            page of it with you.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>"In all the world, there is no heart for me like yours."</p>
+      <small>Made with love, just for you &nbsp; 🌻</small>
+    </footer>
+
+    <script>
+      // ── Floating petals ──
+      const container = document.getElementById("petals");
+      const colors = ["#f9e8e8", "#f0d4d4", "#d4e0d4", "#e8d0e8"];
+      for (let i = 0; i < 18; i++) {
+        const p = document.createElement("div");
+        p.className = "petal";
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.top = Math.random() * 100 + "vh";
+        p.style.width = 8 + Math.random() * 10 + "px";
+        p.style.height = 12 + Math.random() * 14 + "px";
+        p.style.background = colors[Math.floor(Math.random() * colors.length)];
+        p.style.animationDuration = 12 + Math.random() * 20 + "s";
+        p.style.animationDelay = -(Math.random() * 20) + "s";
+        p.style.borderRadius =
+          Math.random() > 0.5 ? "50% 0 50% 0" : "0 50% 0 50%";
+        container.appendChild(p);
+      }
+
+      // ── Timeline scroll reveal ──
+      const items = document.querySelectorAll(".timeline-item");
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+              setTimeout(() => e.target.classList.add("visible"), i * 120);
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+      items.forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
